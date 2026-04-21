@@ -56,14 +56,15 @@ function App() {
   }, [darkMode]);
 
   // ─── ADD FOOD ─────────────────────────────────────────────
-  function addFood(name, expiryDate) {
-    const newFood = {
-      id: Date.now(),
-      name: name,
-      expiryDate: expiryDate,
-    };
-    setFoodList([...foodList, newFood]);
-  }
+  function addFood(name, expiryDate, category) {
+  const newFood = {
+    id: Date.now(),
+    name: name,
+    expiryDate: expiryDate,
+    category: category, // ✅ NEW
+  };
+  setFoodList([...foodList, newFood]);
+}
 
   // ─── DELETE FOOD ──────────────────────────────────────────
   function deleteFood(id) {
