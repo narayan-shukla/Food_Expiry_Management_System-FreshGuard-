@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function AddFood({ addFood }) {
   const [name, setName] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
+  const [category, setCategory] = useState("Dairy");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -26,7 +27,7 @@ function AddFood({ addFood }) {
     if (expiryDate < today) {
       setError("Warning: This item is already expired! Still adding...");
     
-      addFood(name.trim(), expiryDate);
+      addFood(name.trim(), expiryDate, category);
       setName("");
       setExpiryDate("");
       setTimeout(() => {
@@ -37,7 +38,7 @@ function AddFood({ addFood }) {
     }
 
     setError("");
-    addFood(name.trim(), expiryDate);
+    addFood(name.trim(), expiryDate, category);
     setSuccess(`"${name}" added successfully!`);
     setName("");
     setExpiryDate("");
@@ -75,6 +76,21 @@ function AddFood({ addFood }) {
             value={expiryDate}
             onChange={(e) => setExpiryDate(e.target.value)}
           />
+        </div>
+
+        <div className="form-group">
+          <label>Category</label>
+          <select
+            type = "dropdown"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option>Dairy</option>
+            <option>Fruits</option>
+            <option>Vegetables</option>
+            <option>Snacks</option>
+            <option>Other</option>
+          </select>
         </div>
 
         <button className="submit-btn" onClick={handleSubmit}>

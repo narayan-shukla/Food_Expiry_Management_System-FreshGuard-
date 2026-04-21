@@ -207,6 +207,44 @@ body.dark {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  
+}
+
+/* Dropdown (select box) styling */
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Hover effect */
+.form-group select:hover {
+  border-color: #888;
+}
+
+/* Focus (when clicked) */
+.form-group select:focus {
+  border-color: #2d6a4f;
+  box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.2);
+}
+
+/* Dark mode support */
+.dark .form-group select {
+  background-color: #1e1e1e;
+  color: #eee;
+  border: 1px solid #444;
+}
+
+.dark .form-group select:focus {
+  border-color: #52b788;
+  box-shadow: 0 0 0 2px rgba(82, 183, 136, 0.2);
 }
 
 .form-group label { font-size: 14px; font-weight: 600; color: #444; }
@@ -221,6 +259,7 @@ body.dark {
 }
 
 .form-group input:focus { border-color: #2d6a4f; }
+
 
 .submit-btn {
   background: #2d6a4f;

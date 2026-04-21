@@ -30,6 +30,10 @@ function FoodCard({ food, daysLeft, status, onDelete }) {
         </p>
       </div>
 
+      <p className="food-category">
+        Category: {food.category || "Other"}
+      </p>
+
       {/* Bottom: delete button */}
       <button
         className="delete-btn"
