@@ -2,31 +2,88 @@ import FoodCard from "../components/FoodCard";
 import SummaryBar from "../components/SummaryBar";
 
 function Dashboard({ foodList, getDaysLeft, getStatus, deleteFood }) {
-  // Expiry date ke hisaab se sort karo — nearest expiry pehle
+  // Sort by nearest expiry
   const sortedList = [...foodList].sort(
     (a, b) => new Date(a.expiryDate) - new Date(b.expiryDate)
   );
 
-  // Alert: kitne items aaj expire ho rahe hain?
+  // Items expiring today
   const expiringToday = foodList.filter(
     (food) => getDaysLeft(food.expiryDate) === 0
   ).length;
+
+  // 🔥 Suggestions
+  const suggestions = foodList.filter(
+    (food) => getDaysLeft(food.expiryDate) <= 1
+  );
 
   return (
     <div className="page">
       <h1 className="page-title">Dashboard</h1>
 
-      {/* Smart alert banner */}
+      {/* ⚠️ Alert Banner */}
       {expiringToday > 0 && (
         <div className="alert-banner">
           ⚠️ {expiringToday} item(s) expiring today!
         </div>
       )}
 
-      {/* Summary counts */}
+      {/* 🔥 Suggestions Box */}
+      {suggestions.length > 0 && (
+        <div className="suggestion-box">
+
+          {/* Header */}
+          <div className="suggestion-top">
+            <div className="left">
+              <span>✨</span>
+              <h3>Needs attention</h3>
+            </div>
+            <span className="count">{suggestions.length}</span>
+          </div>
+
+          {/* Items */}
+          <div className="suggestion-items">
+            {suggestions.map((food) => {
+              const days = getDaysLeft(food.expiryDate);
+
+              let message =
+                days < 0
+                  ? "Already expired! Discard."
+                  : days === 0
+                  ? "Use today!"
+                  : "Use soon!";
+
+              let status = days < 0 ? "expired" : "expiring";
+
+              return (
+                <div key={food.id} className="suggestion-row">
+
+                  <div className="row-left">
+                    <div className="icon-circle">
+                      {food.name.toLowerCase().includes("milk") ? "🥛" : "🍪"}
+                    </div>
+
+                    <div className="text">
+                      <span className="name">{food.name}</span>
+                      <span className="msg">{message}</span>
+                    </div>
+                  </div>
+
+                  <div className={`badge ${status}`}>
+                    {status === "expired" ? "Expired" : "Expiring"}
+                  </div>
+
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* 📊 Summary */}
       <SummaryBar foodList={foodList} getStatus={getStatus} />
 
-      {/* Food cards */}
+      {/* 🍱 Food List */}
       {sortedList.length === 0 ? (
         <div className="empty-state">
           <p>No food items added yet.</p>

@@ -19,7 +19,13 @@ function SummaryBar({ foodList, getStatus }) {
     return segments.map(s => {
       const dash = (s.value / total) * circumference;
       const gap  = circumference - dash;
-      const seg  = { ...s, dash, gap, offset };
+      const seg = {
+                    ...s,
+                    dash,
+                    gap,
+                    offset,
+                    percent: Math.round((s.value / total) * 100) // ✅ ADD HERE
+                  };
       offset += dash;
       return seg;
     });
@@ -76,14 +82,22 @@ function SummaryBar({ foodList, getStatus }) {
                     strokeWidth={stroke}
                     strokeDasharray={`${s.dash} ${s.gap}`}
                     strokeDashoffset={-s.offset}
-                    style={{ transform: "rotate(-90deg)", transformOrigin: "center" }}
-                  />
+                    style={{
+                      transform: "rotate(-90deg)",
+                      transformOrigin: "center",
+                      transition: "stroke-dasharray 0.6s ease"
+                    }}
+                  >
+                    <title>{s.label}: {s.value} ({s.percent}%)</title>
+                  </circle>
                 ))}
               </svg>
               {/* Center text */}
               <div className="donut-center">
                 <span className="donut-num">{total}</span>
-                <span className="donut-label">Items</span>
+                <span className="donut-label">
+                  {total > 0 ? "Total Items" : ""}
+                </span>
               </div>
             </div>
 
@@ -100,7 +114,9 @@ function SummaryBar({ foodList, getStatus }) {
                     style={{ background: item.color }}
                   />
                   <span className="legend-text">{item.label}</span>
-                  <span className="legend-count">{item.value}</span>
+                  <span className="legend-count">
+                    {item.value} ({total > 0 ? Math.round((item.value / total) * 100) : 0}%)
+                  </span>
                 </div>
               ))}
             </div>
