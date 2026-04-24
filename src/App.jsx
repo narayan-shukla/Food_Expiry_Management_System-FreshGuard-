@@ -11,7 +11,6 @@ import "./App.css";
 import SummaryBar from "./components/SummaryBar";
 
 function App() {
-  // ─── STATE (localStorage se seedha load) ─────────────────
   const [foodList, setFoodList] = useState(() => {
     try {
       const saved = localStorage.getItem("foodList");
@@ -39,7 +38,6 @@ function App() {
     }
   });
 
-  // ─── SAVE TO LOCALSTORAGE ─────────────────────────────────
   useEffect(() => {
     localStorage.setItem("foodList", JSON.stringify(foodList));
   }, [foodList]);
@@ -57,7 +55,7 @@ function App() {
     }
   }, [darkMode]);
 
-  // ─── ADD FOOD ─────────────────────────────────────────────
+
   function addFood(name, expiryDate, category) {
   const newFood = {
     id: Date.now(),
@@ -68,18 +66,17 @@ function App() {
   setFoodList([...foodList, newFood]);
 }
 
-  // ─── DELETE FOOD ──────────────────────────────────────────
+
   function deleteFood(id) {
     const updated = foodList.filter((food) => food.id !== id);
     setFoodList(updated);
   }
 
-  // ─── CLEAR ALL ────────────────────────────────────────────
   function clearAll() {
     setFoodList([]);
   }
 
-  // ─── DAYS LEFT CALCULATE ──────────────────────────────────
+
   function getDaysLeft(expiryDate) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);

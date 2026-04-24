@@ -20,18 +20,18 @@ function Dashboard({ foodList, getDaysLeft, getStatus, deleteFood }) {
   return (
     <div className="page">
 
-      {/* ⚠️ Alert Banner */}
+     
       {expiringToday > 0 && (
         <div className="alert-banner">
           ⚠️ {expiringToday} item(s) expiring today!
         </div>
       )}
 
-      {/* 🔥 Suggestions Box */}
+     
       {suggestions.length > 0 && (
         <div className="suggestion-box">
 
-          {/* Header */}
+       
           <div className="suggestion-top">
             <div className="left">
               <span>✨</span>
@@ -40,7 +40,6 @@ function Dashboard({ foodList, getDaysLeft, getStatus, deleteFood }) {
             <span className="count">{suggestions.length}</span>
           </div>
 
-          {/* Items */}
           <div className="suggestion-items">
             {suggestions.map((food) => {
               const days = getDaysLeft(food.expiryDate);
@@ -79,10 +78,10 @@ function Dashboard({ foodList, getDaysLeft, getStatus, deleteFood }) {
         </div>
       )}
 
-      {/* 📊 Summary */}
+     
       <SummaryBar foodList={foodList} getStatus={getStatus} />
 
-      {/* 🍱 Food List */}
+    
       {sortedList.length === 0 ? (
         <div className="empty-state">
           <p>No food items added yet.</p>

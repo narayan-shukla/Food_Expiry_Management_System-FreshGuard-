@@ -10,8 +10,14 @@ html, body, #root {
 }
 
 .page {
-  min-height: calc(100vh - 80px); /* subtract navbar height */
+  min-height: 100vh;
   padding: 20px 30px;
+
+  background: inherit; /* IMPORTANT */
+}
+
+.app {
+  background: inherit;
 }
 
 .summary-bar,
@@ -32,7 +38,13 @@ body {
 body {
   margin: 0;
   padding: 0;
+   background: #dddfdd;  /* soft light background */
+  color: #111827;
+}
+
+.dark body {
   background: #0b0f0e;
+  color: #ffffff;
 }
 
 #root {
@@ -40,13 +52,15 @@ body {
 }
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  margin: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
 }
 
+/* DARK */
+.dark header {
+  background: #111827;
+  border-bottom: 1px solid #1f2937;
+}
 .page {
   padding: 20px 30px;
 }

@@ -4,9 +4,9 @@ function SummaryBar({ foodList, getStatus }) {
   const expired  = foodList.filter(f => getStatus(f.expiryDate) === "expired").length;
   const total    = foodList.length;
 
-  // ── Donut chart SVG math ──────────────────────────────────
+  
   const cx = 100, cy = 100, r = 70, stroke = 40;
-  const circumference = 2 * Math.PI * r; // circle ki total length
+  const circumference = 2 * Math.PI * r;
 
   function getSegments() {
     const segments = [
@@ -24,7 +24,7 @@ function SummaryBar({ foodList, getStatus }) {
                     dash,
                     gap,
                     offset,
-                    percent: Math.round((s.value / total) * 100) // ✅ ADD HERE
+                    percent: Math.round((s.value / total) * 100) 
                   };
       offset += dash;
       return seg;

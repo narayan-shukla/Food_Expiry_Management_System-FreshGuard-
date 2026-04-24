@@ -1,12 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
-// useLocation: batata hai currently kaunsa page khula hai
-// isse hum active link highlight kar sakte hain
+
 
 function Navbar() {
-  const location = useLocation(); // current path milega jaise "/" ya "/add"
-
-  // Helper: agar current path match kare toh "active" class lagao
+  const location = useLocation(); 
+  
   function isActive(path) {
     return location.pathname === path ? "nav-link active" : "nav-link";
   }

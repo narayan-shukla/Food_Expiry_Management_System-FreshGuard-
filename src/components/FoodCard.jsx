@@ -1,5 +1,5 @@
 function FoodCard({ food, daysLeft, status, onDelete }) {
-  // status ke hisaab se label aur color decide karo
+  
   function getStatusLabel() {
     if (status === "expired") return "Expired — Discard!";
     if (status === "expiring") return "Expiring Soon — Consume Fast!";

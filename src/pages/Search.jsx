@@ -2,21 +2,20 @@ import { useState } from "react";
 import FoodCard from "../components/FoodCard";
 
 function Search({ foodList, getDaysLeft, getStatus, deleteFood }) {
-  const [query, setQuery] = useState("");       // name search
-  const [filter, setFilter] = useState("all");  // status filter
+  const [query, setQuery] = useState("");      
+  const [filter, setFilter] = useState("all");  
 
-  // Pehle name se filter karo
+  
   const byName = foodList.filter((food) =>
     food.name.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Phir status se filter karo
   const results = byName.filter((food) => {
     if (filter === "all") return true;
     return getStatus(food.expiryDate) === filter;
   });
 
-  // Sort by expiry
+
   const sorted = [...results].sort(
     (a, b) => new Date(a.expiryDate) - new Date(b.expiryDate)
   );

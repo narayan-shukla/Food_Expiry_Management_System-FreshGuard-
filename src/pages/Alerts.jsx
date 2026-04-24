@@ -1,13 +1,13 @@
 import FoodCard from "../components/FoodCard";
 
 function Alerts({ foodList, getDaysLeft, getStatus, deleteFood }) {
-  // Sirf expiring aur expired items dikhao
+
   const urgentItems = foodList.filter((food) => {
     const status = getStatus(food.expiryDate);
     return status === "expiring" || status === "expired";
   });
 
-  // Sort by nearest expiry
+
   const sorted = [...urgentItems].sort(
     (a, b) => new Date(a.expiryDate) - new Date(b.expiryDate)
   );
